@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Anniversary 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffdee9, #b5fffc);
+      text-align: center;
+      overflow-x: hidden;
+    }
+    header {
+      padding: 20px;
+    }
+    h1 {
+      margin: 10px 0;
+      font-size: 28px;
+    }
+    .game {
+      margin: 20px auto;
+      max-width: 600px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatUp 6s linear forwards;
+      cursor: pointer;
+    }
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: red;
+    }
+    .heart::before {
+      top: -15px;
+      left: 0;
+    }
+    .heart::after {
+      top: 0;
+      left: -15px;
+    }
+    @keyframes floatUp {
+      0% { bottom: -40px; opacity: 1; }
+      100% { bottom: 100%; opacity: 0; }
+    }
+    #letter {
+      display: none;
+      margin: 30px auto;
+      max-width: 600px;
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.1);
+      line-height: 1.6;
+    }
+    #letter img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 15px 0;
+    }
+    iframe {
+      display: none; /* keep it hidden but autoplay audio */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💌 Happy Anniversary 💌</h1>
+    <p>Pop the hearts to unlock your secret letter!</p>
+  </header>
+
+  <!-- Background Music -->
+  <iframe width="0" height="0" src="https://www.youtube.com/embed/1wa9bDF5X_A?autoplay=1&loop=1&playlist=1wa9bDF5X_A" frameborder="0" allow="autoplay"></iframe>
+
+  <div class="game" id="game">
+    <p>Click the floating hearts ❤️</p>
+  </div>
+
+  <div id="letter">
+    <h2>To my love 💖</h2>
+    <p>30aug 10m txgraaahyao luv chu 3000</p>
+    <img src="AC7717F4-1752-440F-AFE3-7E58EBE6A236.jpeg" alt="Couple Photo">
+    <img src="56A6EEA8-5FFA-46E4-8880-8FDE6B1ECCE7.png" alt="Anime Couple">
+    <p>— Forever yours 🫶</p>
+  </div>
+
+  <script>
+    const game = document.getElementById('game');
+    const letter = document.getElementById('letter');
+    let score = 0;
+    const goal = 8;
+
+    function spawnHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * (game.offsetWidth - 30) + 'px';
+      heart.style.bottom = '-40px';
+      heart.addEventListener('click', () => {
+        heart.remove();
+        score++;
+        if(score >= goal) unlockLetter();
+      });
+      game.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    function unlockLetter() {
+      game.style.display = 'none';
+      letter.style.display = 'block';
+    }
+
+    setInterval(spawnHeart, 1200);
+  </script>
+</body>
+</html>
